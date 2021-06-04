@@ -1,13 +1,13 @@
 const axios = require('axios')
 
-const url = "https://jsonplaceholder.typicode.com/users/";
+const url = "https://api.tvmaze.com/shows";
 
-const getUsers = function () {
+const getShows = function () {
     return axios.get(url)
 }
 
-const getUser = function (id) {
-    return axios.get(url + id)
+const getShow = function (id) {
+    return axios.get(url + '/' +id)
 }
 
-module.exports = {getUsers, getUser}
+module.exports = {getShows, getShow}
