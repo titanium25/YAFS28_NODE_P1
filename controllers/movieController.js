@@ -7,22 +7,17 @@ router.get('/', function(req, res, next) {
     res.render('menu', {});
 });
 
-router.get('/all', function(req, res, next) {
-    let movies = movieBL.getAll()
-    console.log(movies)
-    res.send('OK');
+
+router.get('/search', function(req, res, next) {
+    res.render('search', {message : ''});
 });
 
-// router.get('/search', function(req, res, next) {
-//     res.render('search', {message : ''});
-// });
-//
-// router.post('/s', function(req, res, next) {
-//     let movie = movieBL.getTitle(req)
-//     if(movie == undefined){
-//         res.render('search', {message : 'Movie not found'});
-//     }
-//     res.render('movie', {movie});
-// });
+router.post('/s', async function(req, res, next) {
+    let movie = await movieBL.findMovie(req)
+    if(movie === undefined){
+        res.render('search', {message : 'Movie not found'});
+    } else {
+        res.render('searchResult', {movie});}
+});
 
 module.exports = router;

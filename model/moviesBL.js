@@ -1,12 +1,8 @@
 const restDAL = require('../DAL/restDAL')
+const getValue = value => (typeof value === 'string' ? value.toUpperCase() : value);
 
-exports.getAll = async function () {
+exports.findMovie = async function (req) {
     let movies = await restDAL.getShows();
-    return movies.data.map(x => x.name);
+    return movies.data.find(x => x.name === req.body.title);
 }
 
-exports.getTitle = async function (obj) {
-    let shows = await restDAL.getShows();
-    let title = obj.title;
-    return shows.data.find(x => x.name === title);
-}

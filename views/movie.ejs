@@ -6,6 +6,10 @@
   </head>
   <body>
     <h1>Movie Page</h1>
-    <%= movie.name %>
+    Title: <%= movie.name %> <br>
+    Language : <%= movie.language %> <br>
+    Premiered : <%= movie.premiered %> <br>
+    <a href=<%= movie.image.original %>><img src=<%= movie.image.medium %>></a>
+
   </body>
 </html>
