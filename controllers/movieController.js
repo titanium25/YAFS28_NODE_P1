@@ -15,13 +15,13 @@ router.get('/search', async function(req, res, next) {
 });
 
 router.post('/s', async function(req, res, next) {
-    // let movieTitle = await movieBL.findMovieByTitle(req)
+    let movieTitle = await movieBL.findMovieByTitle(req)
     // let movieLanguage = await movieBL.findMovieByLanguage(req)
-    // let movieGenre = await movieBL.findMovieByGenres(req)
+    let movieGenre = await movieBL.findMovieByGenres(req)
     let searchResults = await movieBL.findMovie(req)
     let genreList = await movieBL.getGenres();
     let languageList = await movieBL.getLanguage()
-    if(searchResults == 0 || searchResults == undefined){
+    if(searchResults.length == 0){
         res.render('search', {message : 'Movie not found', genreList, languageList});
     } else {
         res.render('results', {movie : searchResults});

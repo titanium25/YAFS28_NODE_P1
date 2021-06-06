@@ -7,17 +7,19 @@ exports.findMovie = async function(req) {
     const title = req.body.title;
     const genre = req.body.genres;
     const language = req.body.language;
-    if (title != undefined){
-        return movies.data.find(item => item.name === title);
+    if (title.length > 0){
+        return movies.data.filter(item => item.name === title);
     } else {
-        return movies.data.filter(item.language === language && item.genres.indexOf(genre) > -1)
+        return movies.data.filter(item => item.language === language && item.genres.indexOf(genre) > -1)
     }
 }
 
 exports.findMovieByTitle = async function (req) {
     const movies = await restDAL.getAllMovies()
 
-    return movies.data.find(item => item.name === req.body.title);
+    // let moviesFoundByTitle = moviesData.filter( movie => movie.name.toLowerCase().includes(chosenMovieName) );
+
+    return movies.data.filter(item => item.name === req.body.title);
 }
 
 exports.findMovieByLanguage= async function (req) {
