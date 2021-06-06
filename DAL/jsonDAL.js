@@ -1,14 +1,25 @@
 const jsonFile = require("jsonfile");
-const fileName = __dirname +  "/users.json";
+const fileNameGenres = __dirname +  "/genresList.json";
+const fileNameLanguage = __dirname +  "/languageList.json";
 
-exports.readUsers = () => {
+exports.getGenres = () => {
     return new Promise((resolve, reject) => {
-        jsonFile.readFile(fileName, (err, res) => {
+        jsonFile.readFile(fileNameGenres, (err, res) => {
             if (err) {
-                reject(err)
-            } else {
-                resolve(res)
-            }
+                reject(err);
+            };
+            resolve(res);
+        });
+    });
+};
+
+exports.getLanguage = () => {
+    return new Promise((resolve, reject) => {
+        jsonFile.readFile(fileNameLanguage, (err, res) => {
+            if (err) {
+                reject(err);
+            };
+            resolve(res);
         });
     });
 };

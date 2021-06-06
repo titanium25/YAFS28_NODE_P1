@@ -2,8 +2,9 @@ const axios = require('axios')
 
 const url = "https://api.tvmaze.com/shows";
 
-const getShows = function () {
+exports.getAllMovies = function () {
     return axios.get(url)
 }
-
-module.exports = {getShows}
+exports.getMovie = function (id) {
+    return axios.get(url + '/' + id)
+}

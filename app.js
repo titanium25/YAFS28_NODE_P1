@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session')
 
-var loginController = require('./controllers/loginController');
 var movieController = require('./controllers/movieController');
 
 var app = express();
@@ -25,7 +24,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use('/', loginController);
 app.use('/', movieController);
 
 // catch 404 and forward to error handler
