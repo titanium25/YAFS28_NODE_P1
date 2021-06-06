@@ -14,10 +14,7 @@ router.get('/search', async function(req, res, next) {
     res.render('search', {message : '', genreList, languageList});
 });
 
-router.post('/s', async function(req, res, next) {
-    let movieTitle = await movieBL.findMovieByTitle(req)
-    // let movieLanguage = await movieBL.findMovieByLanguage(req)
-    let movieGenre = await movieBL.findMovieByGenres(req)
+router.post('/', async function(req, res, next) {
     let searchResults = await movieBL.findMovie(req)
     let genreList = await movieBL.getGenres();
     let languageList = await movieBL.getLanguage()

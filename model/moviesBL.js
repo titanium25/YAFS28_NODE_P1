@@ -1,39 +1,16 @@
 const restDAL = require('../DAL/restDAL')
 const jsonDAL = require('../DAL/jsonDAL')
-const getValue = value => (typeof value === 'string' ? value.toUpperCase() : value);
 
-exports.findMovie = async function(req) {
+exports.findMovie = async function (req) {
     const movies = await restDAL.getAllMovies()
-    const title = req.body.title;
+    const title = req.body.title.toLowerCase();
     const genre = req.body.genres;
     const language = req.body.language;
-    if (title.length > 0){
-        return movies.data.filter(item => item.name.toLowerCase().includes(title));
-    } else {
-        return movies.data.filter(item => item.language === language && item.genres.indexOf(genre) > -1)
-    }
-}
-
-exports.findMovieByTitle = async function (req) {
-    const movies = await restDAL.getAllMovies()
-
-    return movies.data.filter(item => item.name.toLowerCase().includes(req.body.title));
-}
-
-exports.findMovieByLanguage= async function (req) {
-    const movies = await restDAL.getAllMovies()
-
-    return movies.data.filter(item => item.language === req.body.language);
-}
-
-exports.findMovieByGenres= async function (req) {
-    const movies = await restDAL.getAllMovies()
-
-    return movies.data.filter(item => item.genres.indexOf(req.body.genres) > -1);
-}
-exports.findMovieById = async function (id) {
-    const movie = await restDAL.getMovie(id)
-    return movie.data;
+    return movies.data.filter(x =>
+        (x.name.toLowerCase().includes(title) || x.name == '') &&
+        (x.language == language || x.language == '') &&
+        (x.genres.includes(genre) || x.genres == '')
+    )
 }
 
 exports.getGenres = async function () {
