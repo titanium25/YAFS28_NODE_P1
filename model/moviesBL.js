@@ -13,6 +13,11 @@ exports.findMovie = async function (req) {
     )
 }
 
+exports.findMovieById = async function (id) {
+    const movie = await restDAL.getMovie(id)
+    return movie.data;
+}
+
 exports.getGenres = async function () {
     const response = await jsonDAL.getGenres();
     return response.genres.sort()
