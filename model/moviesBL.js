@@ -8,7 +8,7 @@ exports.findMovie = async function(req) {
     const genre = req.body.genres;
     const language = req.body.language;
     if (title.length > 0){
-        return movies.data.filter(item => item.name === title);
+        return movies.data.filter(item => item.name.toLowerCase().includes(title));
     } else {
         return movies.data.filter(item => item.language === language && item.genres.indexOf(genre) > -1)
     }
@@ -17,9 +17,7 @@ exports.findMovie = async function(req) {
 exports.findMovieByTitle = async function (req) {
     const movies = await restDAL.getAllMovies()
 
-    // let moviesFoundByTitle = moviesData.filter( movie => movie.name.toLowerCase().includes(chosenMovieName) );
-
-    return movies.data.filter(item => item.name === req.body.title);
+    return movies.data.filter(item => item.name.toLowerCase().includes(req.body.title));
 }
 
 exports.findMovieByLanguage= async function (req) {
