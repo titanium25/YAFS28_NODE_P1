@@ -12,28 +12,7 @@ exports.findMovie = async function(req) {
         (item.genres.includes(genre) || genre == '')
     )
 }
-const saveNewUser = async function (obj) {
 
-    let fullNameData = obj.firstName + ' ' + obj.lastName
-
-    let resp = await restDAL.getUsers()
-    let allUsers = resp.data;
-    let userArr = allUsers.filter(x => x.name === fullNameData);
-
-    if(userArr.length === 0){
-        let userObj = {fullName: fullNameData}
-        let status = await restDAL.saveUser(userObj)
-        console.log(status.data)
-
-        const objecCon = {id : 1, gender : obj.gender, adult : obj.adult? 'adult' : 'minor', city : obj.city }
-        let response = await jsonDAL.saveJson(objecCon)
-
-        return "User saved!";
-    } else {
-        return "User with that name exists!"
-    }
-
-}
 exports.addMovie = async function(req) {
     const title = req.body.title.toLowerCase();
     const genre = req.body.genres;
