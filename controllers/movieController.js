@@ -18,10 +18,11 @@ router.post('/', async function(req, res, next) {
     let searchResults = await movieBL.findMovie(req)
     let genreList = await movieBL.getGenres();
     let languageList = await movieBL.getLanguage()
+    let params = [req.body.title, req.body.language, req.body.genres]
     if(searchResults.length == 0){
         res.render('search', {message : 'Movie not found', genreList, languageList});
     } else {
-        res.render('results', {movie : searchResults});
+        res.render('results', {movie : searchResults, params});
     }
 });
 
