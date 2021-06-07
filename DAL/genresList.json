@@ -1,5 +1,5 @@
 {
-  "genres" : [
+  "genres": [
     "Drama",
     "Science-Fiction",
     "Thriller",
@@ -23,18 +23,13 @@
     "War",
     "Sports",
     "Disaster",
-    "Dramas",
-    "Melo-dramas",
     "Christmas",
     "Musical-Dance",
     "Silent",
-    "Sexual-Erotic",
     "Zombie",
     "Animated",
-    "Car Racing",
     "Dance",
     "Documentary",
-    "Gay/Lesbian",
     "Heist",
     "Inspirational"
   ]
