@@ -7,10 +7,17 @@ router.get('/', function(req, res, next) {
     res.render('menu', {});
 });
 
-router.get('/addMovie', async function(req, res, next) {
+router.get('/add', async function(req, res, next) {
     let genreList = await movieBL.getGenres();
     let languageList = await movieBL.getLanguage()
-    res.render('addMovie', {genreList, languageList});
+    res.render('addMovie', {message : '', genreList, languageList});
+});
+
+router.post('/addForm', async function(req, res, next) {
+    let saveMovie = await movieBL.addMovie(req)
+    let genreList = await movieBL.getGenres();
+    let languageList = await movieBL.getLanguage()
+    res.render('addMovie', {message : saveMovie, genreList, languageList});
 });
 
 router.get('/search', async function(req, res, next) {

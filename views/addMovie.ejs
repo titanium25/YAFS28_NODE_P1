@@ -6,7 +6,7 @@
   </head>
   <body>
     <h1>Add a new movie</h1>
-    <form action="/add" method="post">
+    <form action="/addForm" method="post">
       Title: <input type="text" name="title"> <br> <br>
       <label for="language">Language:</label>
       <select name="language" id="language">
@@ -25,6 +25,7 @@
       </select>
       <input type="submit" value="Add"> <br> <br>
     </form>
+    <%= message %>
     <br> <br>
     <a href="/">Back to menu</a>
   </body>
