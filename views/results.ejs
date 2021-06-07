@@ -12,12 +12,11 @@
   <body>
     <h1>Result Page</h1>
     <h2>Search parameters: <%= params %></h2>
+    <button onclick="goBack()">Go Back</button>
     <ol>
       <% movie.forEach(function(m) { %>
         <li><a href="/<%= m.id %>"><%= m.name %></a>  </li>
       <% }); %>
     </ol>
-
-    <button onclick="goBack()">Go Back</button>
   </body>
 </html>
