@@ -6,7 +6,25 @@
   </head>
   <body>
     <h1>Add a new movie</h1>
-
+    <form action="/add" method="post">
+      Title: <input type="text" name="title"> <br> <br>
+      <label for="language">Language:</label>
+      <select name="language" id="language">
+        <option value=""></option>
+        <% languageList.forEach(function(item) { %>
+          <option value="<%= item %>"><%= item %></option>
+        <% }); %>
+      </select>
+      <br> <br>
+      <label for="genres">Genres:</label>
+      <select name="genres" id="genres">
+        <option value=""></option>
+        <% genreList.forEach(function(item) { %>
+          <option value="<%= item %>"><%= item %></option>
+        <% }); %>
+      </select>
+      <input type="submit" value="Add"> <br> <br>
+    </form>
     <br> <br>
     <a href="/">Back to menu</a>
   </body>

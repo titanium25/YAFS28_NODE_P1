@@ -7,6 +7,12 @@ router.get('/', function(req, res, next) {
     res.render('menu', {});
 });
 
+router.get('/addMovie', async function(req, res, next) {
+    let genreList = await movieBL.getGenres();
+    let languageList = await movieBL.getLanguage()
+    res.render('addMovie', {genreList, languageList});
+});
+
 router.get('/search', async function(req, res, next) {
     let genreList = await movieBL.getGenres();
     let languageList = await movieBL.getLanguage()
@@ -31,8 +37,6 @@ router.get('/:id', async function(req, res, next) {
     res.render('movie', {movie});
 });
 
-router.get('/addMovie', function(req, res, next) {
-    res.send('ok');
-});
+
 
 module.exports = router;
