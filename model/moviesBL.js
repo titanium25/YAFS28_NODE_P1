@@ -17,8 +17,14 @@ exports.addMovie = async function(req) {
     const title = req.body.title.toLowerCase();
     const genre = req.body.genres;
     const language = req.body.language;
-    const newMovieObj = {id : 1, title, language, genre}
-    let response = await jsonDAL.saveMovie(newMovieObj)
+    let moviesArr = await jsonDAL.getMovies();
+    moviesArr.movies.push({
+        id : 1,
+        title,
+        language,
+        genre
+    })
+    let response = await jsonDAL.saveMovie(moviesArr)
     return response;
 }
 

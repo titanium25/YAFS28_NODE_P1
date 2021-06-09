@@ -1,1 +1,34 @@
-{"id":1,"title":"under the dome","language":"English","genre":"Action"}
+{
+  "movies": [
+    {
+      "id": 1,
+      "title": "asd",
+      "language": "asdd",
+      "genre": "Drama"
+    },
+    {
+      "id": 1,
+      "title": "back end",
+      "language": "English",
+      "genre": "Action"
+    },
+    {
+      "id": 1,
+      "title": "person of interest",
+      "language": "English",
+      "genre": "Anime"
+    },
+    {
+      "id": 1,
+      "title": "two girls one cup",
+      "language": "English",
+      "genre": "Animated"
+    },
+    {
+      "id": 1,
+      "title": "death",
+      "language": "English",
+      "genre": "Action"
+    }
+  ]
+}
