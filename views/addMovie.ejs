@@ -1,32 +1,56 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Add a new movie</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>Add a new movie</h1>
-    <form action="/addForm" method="post">
-      Title: <input type="text" name="title"> <br> <br>
-      <label for="language">Language:</label>
-      <select name="language" id="language">
-        <option value=""></option>
-        <% languageList.forEach(function(item) { %>
-          <option value="<%= item %>"><%= item %></option>
-        <% }); %>
-      </select>
-      <br> <br>
-      <label for="genres">Genres:</label>
-      <select name="genres" id="genres">
-        <option value=""></option>
-        <% genreList.forEach(function(item) { %>
-          <option value="<%= item %>"><%= item %></option>
-        <% }); %>
-      </select>
-      <input type="submit" value="Add"> <br> <br>
-    </form>
-    <%= message %>
-    <br> <br>
-    <a href="/">Back to menu</a>
-  </body>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+                removeItemButton: true,
+                maxItemCount: 3,
+                searchResultLimit: 32,
+                renderChoiceLimit: 32
+            });
+
+
+        });
+    </script>
+</head>
+<body>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+<script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+
+<h1>Add a new movie</h1>
+<div class="row d-flex justify-content-left mt-100">
+    <div class="col-md-4">
+        <form action="/addForm" method="post">
+            Title: <input type="text" name="title"> <br> <br>
+            <label for="language">Language:</label>
+            <select name="language" id="language">
+                <option value=""></option>
+                <% languageList.forEach(function(item) { %>
+                    <option value="<%= item %>"><%= item %></option>
+                <% }); %>
+            </select>
+            <br> <br>
+            <label for="genres">Genres:</label>
+            <select name="genres" id="choices-multiple-remove-button" placeholder="Select upto 3 geners" multiple>
+                <option value=""></option>
+                <% genreList.forEach(function(item) { %>
+                    <option value="<%= item %>"><%= item %></option>
+                <% }); %>
+            </select>
+            <input type="submit" value="Add"> <br> <br>
+        </form>
+    </div>
+</div>
+<%= message %>
+<br> <br>
+<a href="/">Back to menu</a>
+</body>
 </html>

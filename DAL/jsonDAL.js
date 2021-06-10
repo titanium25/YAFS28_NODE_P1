@@ -20,7 +20,7 @@ exports.saveMovie = (obj) => {
             if (err){
                 reject(err);
             } else {
-                resolve("Created!");
+                resolve("Movie Saved!");
             }
         })
     })

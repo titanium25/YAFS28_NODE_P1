@@ -14,21 +14,32 @@ exports.findMovie = async function(req) {
 }
 
 exports.addMovie = async function(req) {
-    const title = req.body.title.toLowerCase();
+    const title = req.body.title;
     const genre = req.body.genres;
     const language = req.body.language;
-    let moviesArr = await jsonDAL.getMovies();
-    let movies = moviesArr.movies
-    let lastMovie = movies[movies.length - 1]
-    let id = lastMovie.id + 1
-    movies.push({
-        id,
-        title,
-        language,
-        genre
-    })
-    let response = await jsonDAL.saveMovie(moviesArr)
-    return response;
+    if(title.length == 0 ) {
+        return "Please type movie title"
+    }
+    if (language.length == 0) {
+        return "Please choose movie language"
+    }
+    if(genre == undefined){
+        return "Please choose movie genre"
+    } else {
+        let moviesArr = await jsonDAL.getMovies();
+        let movies = moviesArr.movies
+        let lastMovie = movies[movies.length - 1]
+        let id = lastMovie.id + 1
+        movies.push({
+            id,
+            title,
+            language,
+            genre
+        })
+        let response = await jsonDAL.saveMovie(moviesArr)
+        return response;
+    }
+
 }
 
 exports.findMovieById = async function (id) {
