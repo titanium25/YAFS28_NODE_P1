@@ -18,8 +18,11 @@ exports.addMovie = async function(req) {
     const genre = req.body.genres;
     const language = req.body.language;
     let moviesArr = await jsonDAL.getMovies();
-    moviesArr.movies.push({
-        id : 1,
+    let movies = moviesArr.movies
+    let lastMovie = movies[movies.length - 1]
+    let id = lastMovie.id + 1
+    movies.push({
+        id,
         title,
         language,
         genre

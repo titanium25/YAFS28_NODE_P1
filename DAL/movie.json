@@ -2,33 +2,27 @@
   "movies": [
     {
       "id": 1,
-      "title": "asd",
-      "language": "asdd",
-      "genre": "Drama"
+      "title": "bitten",
+      "language": "Japanese",
+      "genre": "Adventure"
     },
     {
-      "id": 1,
+      "id": 2,
       "title": "back end",
-      "language": "English",
+      "language": "Japanese",
       "genre": "Action"
     },
     {
-      "id": 1,
+      "id": 3,
       "title": "person of interest",
       "language": "English",
-      "genre": "Anime"
-    },
-    {
-      "id": 1,
-      "title": "two girls one cup",
-      "language": "English",
-      "genre": "Animated"
-    },
-    {
-      "id": 1,
-      "title": "death",
-      "language": "English",
       "genre": "Action"
+    },
+    {
+      "id": 4,
+      "title": "under",
+      "language": "English",
+      "genre": "Inspirational"
     }
   ]
 }
