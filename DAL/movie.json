@@ -2,41 +2,11 @@
   "movies": [
     {
       "id": 250,
-      "title": "Back end",
+      "name": "Back end",
       "language": "Japanese",
-      "genre": [
-        "Action",
-        "Adventure",
-        "Animated"
-      ]
-    },
-    {
-      "id": 251,
-      "title": "Person of Interest",
-      "language": "English",
-      "genre": [
-        "Adventure",
-        "Animated",
-        "Anime"
-      ]
-    },
-    {
-      "id": 252,
-      "title": "Bitten",
-      "language": "Japanese",
-      "genre": [
+      "genres": [
         "Animated",
         "Anime",
-        "Christmas"
-      ]
-    },
-    {
-      "id": 253,
-      "title": "sdfdsfds",
-      "language": "Japanese",
-      "genre": [
-        "Adventure",
-        "Animated",
         "Christmas"
       ]
     }

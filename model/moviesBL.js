@@ -23,17 +23,17 @@ exports.findMovie = async function(req) {
 }
 
 exports.addMovie = async function(req) {
-    const title = req.body.title;
-    const genre = req.body.genres;
+    const name = req.body.title;
+    const genres = req.body.genres;
     const language = req.body.language;
 
-    if(title.length == 0 ) {
+    if(name.length == 0 ) {
         return "Please type movie title"
     }
     if (language.length == 0) {
         return "Please choose movie language"
     }
-    if(genre == undefined){
+    if(genres == undefined){
         return "Please choose movie genre"
     } else {
         const moviesArr = await jsonDAL.getMovies();
@@ -47,9 +47,9 @@ exports.addMovie = async function(req) {
 
         movies.push({
             id,
-            title,
+            name,
             language,
-            genre
+            genres
         })
         let response = await jsonDAL.saveMovie(moviesArr)
         return response;
