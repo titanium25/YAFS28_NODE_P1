@@ -68,16 +68,11 @@ exports.addMovie = async function(req) {
 
 exports.findMovieById = async function (id) {
     const moviesJSON = await jsonDAL.getMovies();
+    const movieAPI = await restDAL.getMovie(id)
     let moviesArrJSON = moviesJSON.movies;
     let lastMovie = moviesArrJSON[moviesArrJSON.length - 1];
-    if(id < lastMovie.id){
-        const movie = await restDAL.getMovie(id)
-        return movie.data;
-    } else {
-        const movie = await jsonDAL.getMovies()
-        return movie.movies.find(item => item.id == id);
-    }
 
+    return id < lastMovie.id ? movieAPI.data : moviesArrJSON.find(item => item.id == id);
 }
 
 exports.getGenres = async function () {

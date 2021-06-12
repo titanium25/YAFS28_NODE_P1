@@ -43,7 +43,7 @@ router.post('/', async function(req, res, next) {
 router.get('/:id', async function(req, res, next) {
     let movieId = req.params.id;
     let movie = await movieBL.findMovieById(movieId);
-    res.render('movie', {movie});
+    res.render('movie', {movie, lastId : 250});
 });
 
 
