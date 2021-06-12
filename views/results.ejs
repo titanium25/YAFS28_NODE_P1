@@ -3,6 +3,7 @@
   <head>
     <title>Search Result Page</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/table.css' />
   </head>
   <script>
     function goBack() {
@@ -11,12 +12,48 @@
   </script>
   <body>
     <h1>Result Page</h1>
-    <h2>Search parameters: <%= params[0] %> <%= params[1] %> <%= params[2] %> </h2>
+    <h2>Search parameters </h2>
+    <% if (params[0]) { %>
+    <h3>Title: <%= params[0] %></h3>
+      <% }%>
+    <% if (params[1]) { %>
+      <h3>Language: <%= params[1] %></h3>
+    <% }%>
+    <% if (params[2]) { %>
+    <h3>Genre: <%= params[2] %></h3>
+    <% }%>
+
     <button onclick="goBack()">Go Back</button>
-    <ol>
-      <% movie.forEach(function(m) { %>
-        <li><a href="/<%= m.id %>"><%= m.name %></a>  </li>
-      <% }); %>
-    </ol>
+    <br> <br>
+
+
+    <table border="1">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Meets the search requirements</th>
+      </tr>
+      <% let count = 0; movie.forEach(function(m) { %>
+        <tr>
+          <th scope="row"><%= count + 1 %></th>
+          <td><a href="/<%= m.id %>"><%= m.name %></a></td>
+        </tr>
+      <% count++ %>
+      <% }) %>
+    </table>
+
+    <table border="1">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Same Genre</th>
+      </tr>
+      <% let countGenre = 0; genres.forEach(function(m) { %>
+        <tr>
+          <th scope="row"><%= countGenre + 1 %></th>
+          <td><a href="/<%= m.id %>"><%= m.name %></a></td>
+        </tr>
+        <% countGenre++ %>
+      <% }) %>
+    </table>
+
   </body>
 </html>

@@ -2,12 +2,12 @@ const restDAL = require('../DAL/restDAL')
 const jsonDAL = require('../DAL/jsonDAL')
 
 exports.findMovie = async function(req) {
-    const movies = await restDAL.getAllMovies()
+    const moviesAPI = await restDAL.getAllMovies()
     const moviesJSON = await jsonDAL.getMovies()
     const name = req.body.title.toLowerCase();
     const genres = req.body.genres;
     const language = req.body.language;
-    let movieREST = movies.data.filter(item =>
+    let movieREST = moviesAPI.data.filter(item =>
         (item.name.toLowerCase().includes(name) || name == '') &&
         (item.language == language || language == '') &&
         (item.genres.includes(genres) || genres == '')
@@ -20,6 +20,14 @@ exports.findMovie = async function(req) {
     )
 
     return movieREST.concat(movieJSON)
+}
+
+exports.findMovieByGenre = async function(req) {
+    const moviesAPI = await restDAL.getAllMovies()
+    const moviesJSON = await jsonDAL.getMovies()
+    const gen = req.body.genres;
+
+    return moviesAPI.data.filter(item => item.genres.includes(gen))
 }
 
 exports.addMovie = async function(req) {

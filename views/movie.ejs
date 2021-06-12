@@ -16,6 +16,7 @@
     Language : <%= movie.language %> <br>
     Genres : <%= movie.genres %> <br>
 
+<!--  250 value hardcoded, instead send the value from BL troth controller  -->
     <% if(movie.id < 250){ %>
       Rating: <%= movie.rating.average %> <br>
       Premiered : <%= movie.premiered %> <br>
