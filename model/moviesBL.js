@@ -4,22 +4,22 @@ const jsonDAL = require('../DAL/jsonDAL')
 exports.findMovie = async function(req) {
     const movies = await restDAL.getAllMovies()
     const moviesJSON = await jsonDAL.getMovies()
-    const title = req.body.title.toLowerCase();
-    const genre = req.body.genres;
+    const name = req.body.title.toLowerCase();
+    const genres = req.body.genres;
     const language = req.body.language;
-    // let movieREST = movies.data.filter(item =>
-    //     (item.name.toLowerCase().includes(title) || title == '') &&
-    //     (item.language == language || language == '') &&
-    //     (item.genres.includes(genre) || genre == '')
-    // )
-
-    return moviesJSON.movies.filter(item =>
-        (item.title.toLowerCase().includes(title) || title == '') &&
+    let movieREST = movies.data.filter(item =>
+        (item.name.toLowerCase().includes(name) || name == '') &&
         (item.language == language || language == '') &&
-        (item.genre.includes(genre) || genre == '')
+        (item.genres.includes(genres) || genres == '')
     )
 
-    // return movieREST.concat(movieJSON)
+    let movieJSON = moviesJSON.movies.filter(item =>
+        (item.name.toLowerCase().includes(name) || name == '') &&
+        (item.language == language || language == '') &&
+        (item.genres.includes(genres) || genres == '')
+    )
+
+    return movieREST.concat(movieJSON)
 }
 
 exports.addMovie = async function(req) {
