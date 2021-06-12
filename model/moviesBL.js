@@ -23,11 +23,15 @@ exports.findMovie = async function(req) {
 }
 
 exports.findMovieByGenre = async function(req) {
-    const moviesAPI = await restDAL.getAllMovies()
-    const moviesJSON = await jsonDAL.getMovies()
-    const gen = req.body.genres;
+    // const moviesJSON = await jsonDAL.getMovies();
+    const movieAPI = await restDAL.getAllMovies()
+    // let moviesArrJSON = moviesJSON.movies;
+    const name = req.body.title.toLowerCase();
 
-    return moviesAPI.data.filter(item => item.genres.includes(gen))
+    let fa = movieAPI.data.filter(item => item.name.toLowerCase().includes(name))
+    // let sa = fa[3]
+    console.log(fa) // TODO
+    return movieAPI.data.filter(item => item.genres.includes(fa))
 }
 
 exports.addMovie = async function(req) {

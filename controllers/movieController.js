@@ -28,8 +28,7 @@ router.get('/search', async function(req, res, next) {
 
 router.post('/', async function(req, res, next) {
     let searchResults = await movieBL.findMovie(req)
-    let searchGeneres = await movieBL.getGenres(req)
-    console.log(searchGeneres)
+    let searchGeneres = await movieBL.findMovieByGenre(req)
     let genreList = await movieBL.getGenres();
     let languageList = await movieBL.getLanguage()
     let params = [req.body.title, req.body.language, req.body.genres]
