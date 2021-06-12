@@ -11,7 +11,7 @@
   </script>
   <body>
     <h1>Result Page</h1>
-    <h2>Search parameters: <%= params %></h2>
+    <h2>Search parameters: <%= params[0] %> <%= params[1] %> <%= params[2] %> </h2>
     <button onclick="goBack()">Go Back</button>
     <ol>
       <% movie.forEach(function(m) { %>

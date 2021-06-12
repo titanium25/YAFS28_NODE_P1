@@ -36,30 +36,40 @@ exports.addMovie = async function(req) {
     if(genres == undefined){
         return "Please choose movie genre"
     } else {
-        const moviesArr = await jsonDAL.getMovies();
+        const moviesJSON = await jsonDAL.getMovies();
         const moviesAPI = await restDAL.getAllMovies()
-        const last = moviesAPI.data
+        const lastMovieAPI = moviesAPI.data
 
-        let movies = moviesArr.movies
-        let lastMovie = movies[movies.length - 1]
-        if(lastMovie === undefined) lastMovie = last[last.length - 1]
+        let moviesArrJSON = moviesJSON.movies
+        let lastMovie = moviesArrJSON[moviesArrJSON.length - 1]
+        if(lastMovie === undefined)
+            lastMovie = lastMovieAPI[lastMovieAPI.length - 1]
         let id = lastMovie.id + 1
 
-        movies.push({
+        moviesArrJSON.push({
             id,
             name,
             language,
             genres
         })
-        let response = await jsonDAL.saveMovie(moviesArr)
+        let response = await jsonDAL.saveMovie(moviesJSON)
         return response;
     }
 
 }
 
 exports.findMovieById = async function (id) {
-    const movie = await restDAL.getMovie(id)
-    return movie.data;
+    const moviesJSON = await jsonDAL.getMovies();
+    let moviesArrJSON = moviesJSON.movies;
+    let lastMovie = moviesArrJSON[moviesArrJSON.length - 1];
+    if(id < lastMovie.id){
+        const movie = await restDAL.getMovie(id)
+        return movie.data;
+    } else {
+        const movie = await jsonDAL.getMovies()
+        return movie.movies.find(item => item.id == id);
+    }
+
 }
 
 exports.getGenres = async function () {

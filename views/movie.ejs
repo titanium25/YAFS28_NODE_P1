@@ -11,18 +11,20 @@
   </script>
   <body>
     <h1>Movie Page</h1>
+
     Title: <%= movie.name %> <br>
-    Rating: <%= movie.rating.average %> <br>
     Language : <%= movie.language %> <br>
-    Premiered : <%= movie.premiered %> <br>
     Genres : <%= movie.genres %> <br>
-    <% if (movie.officialSite) { %>
-    Official Site : <a href="<%= movie.officialSite %>" target="_blank"><%= movie.officialSite %></a> <br>
+
+    <% if(movie.id < 250){ %>
+      Rating: <%= movie.rating.average %> <br>
+      Premiered : <%= movie.premiered %> <br>
+      Official Site : <a href="<%= movie.officialSite %>" target="_blank"><%= movie.officialSite %></a> <br>
+    <br>
+      <a href=<%= movie.image.original %> target="_blank"><img src=<%= movie.image.medium %>></a>
+    <br>
+      <%- movie.summary %>
     <% } %>
-    <br>
-    <a href=<%= movie.image.original %> target="_blank"><img src=<%= movie.image.medium %>></a>
-    <br>
-    <%- movie.summary %>
     <br>
     <button onclick="goBack()">Go Back</button>
   </body>
