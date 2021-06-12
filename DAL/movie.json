@@ -1,129 +1,34 @@
 {
   "movies": [
     {
-      "id": 1,
-      "title": "bitten",
+      "id": 250,
+      "title": "Back end",
       "language": "Japanese",
-      "genre": "Adventure"
-    },
-    {
-      "id": 2,
-      "title": "back end",
-      "language": "Japanese",
-      "genre": "Action"
-    },
-    {
-      "id": 3,
-      "title": "person of interest",
-      "language": "English",
-      "genre": "Action"
-    },
-    {
-      "id": 4,
-      "title": "under",
-      "language": "English",
-      "genre": "Inspirational"
-    },
-    {
-      "id": 5,
-      "title": "bitten",
-      "language": "Japanese",
-      "genre": "Adventure"
-    },
-    {
-      "id": 6,
-      "title": "bitten",
-      "language": "Japanese",
-      "genre": "Adventure"
-    },
-    {
-      "id": 7,
-      "title": "bitten",
-      "language": "English",
-      "genre": [
-        "Animated",
-        "Adventure",
-        "Comedy",
-        "Anime",
-        "Crime"
-      ]
-    },
-    {
-      "id": 8,
-      "title": "some new movie",
-      "language": "English",
       "genre": [
         "Action",
-        "Family",
-        "Music"
-      ]
-    },
-    {
-      "id": 9,
-      "title": "back end",
-      "language": "English",
-      "genre": [
         "Adventure",
-        "Crime",
-        "Music"
+        "Animated"
       ]
     },
     {
-      "id": 10,
-      "title": "some new show",
-      "language": "Japanese",
-      "genre": [
-        "History",
-        "Legal",
-        "Music"
-      ]
-    },
-    {
-      "id": 11,
-      "title": "",
-      "language": "",
-      "genre": [
-        "Action",
-        "Christmas",
-        "Dance"
-      ]
-    },
-    {
-      "id": 12,
+      "id": 251,
       "title": "Person of Interest",
       "language": "English",
       "genre": [
-        "Action",
+        "Adventure",
         "Animated",
-        "Christmas"
+        "Anime"
       ]
     },
     {
-      "id": 13,
-      "title": "",
-      "language": "English"
-    },
-    {
-      "id": 14,
-      "title": "",
-      "language": ""
-    },
-    {
-      "id": 15,
-      "title": "Back end",
-      "language": "English"
-    },
-    {
-      "id": 16,
-      "title": "Back end",
-      "language": "English",
-      "genre": "Christmas"
-    },
-    {
-      "id": 17,
+      "id": 252,
       "title": "Bitten",
-      "language": "English",
-      "genre": "Animated"
+      "language": "Japanese",
+      "genre": [
+        "Animated",
+        "Anime",
+        "Christmas"
+      ]
     }
   ]
 }
