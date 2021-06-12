@@ -36,9 +36,9 @@ exports.addMovie = async function(req) {
     if(genre == undefined){
         return "Please choose movie genre"
     } else {
-        let moviesArr = await jsonDAL.getMovies();
+        const moviesArr = await jsonDAL.getMovies();
         const moviesAPI = await restDAL.getAllMovies()
-        let last = moviesAPI.data
+        const last = moviesAPI.data
 
         let movies = moviesArr.movies
         let lastMovie = movies[movies.length - 1]
