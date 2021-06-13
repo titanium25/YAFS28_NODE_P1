@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-// var session = require('express-session')
+var session = require('express-session')
 
 var loginController = require('./controllers/loginController');
 var movieController = require('./controllers/movieController');
@@ -15,9 +15,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 //session's
-// app.use(session({w
-//   secret: 'keyboard cat'
-// }));
+app.use(session({
+  secret: 'keyboard cat'
+}));
 
 app.use(logger('dev'));
 app.use(express.json());
