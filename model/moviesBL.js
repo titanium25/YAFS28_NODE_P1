@@ -1,27 +1,39 @@
 const restDAL = require('../DAL/restDAL')
 const jsonDAL = require('../DAL/jsonDAL')
 
+
+// globalConstants = async (req) => {
+//
+// }
+
 exports.findMovie = async function(req) {
     const moviesAPI = await restDAL.getAllMovies()
     const moviesJSON = await jsonDAL.getMovies()
     const name = req.body.title.toLowerCase();
     const genres = req.body.genres;
     const language = req.body.language;
+
     let movieREST = moviesAPI.data.filter(item =>
         (item.name.toLowerCase().includes(name) || name == '') &&
         (item.language == language || language == '') &&
         (item.genres.includes(genres) || genres == '')
     )
-
     let movieJSON = moviesJSON.movies.filter(item =>
         (item.name.toLowerCase().includes(name) || name == '') &&
         (item.language == language || language == '') &&
         (item.genres.includes(genres) || genres == '')
     )
 
-    return movieREST.concat(movieJSON)
+
+        return movieREST.concat(movieJSON)
+
 }
 
+// TODO
+// IF no genre in form - search for movie with same genre
+//
+
+// Search for
 exports.findMovieByGenre = async function(req) {
     // const moviesJSON = await jsonDAL.getMovies();
     const movieAPI = await restDAL.getAllMovies()
@@ -29,9 +41,13 @@ exports.findMovieByGenre = async function(req) {
     const name = req.body.title.toLowerCase();
 
     let fa = movieAPI.data.filter(item => item.name.toLowerCase().includes(name))
-    // let sa = fa[3]
-    console.log(fa) // TODO
-    return movieAPI.data.filter(item => item.genres.includes(fa))
+    console.log(fa)
+
+    let sa = fa[0].genres[0]
+    console.log(sa)
+    let findAllMoviesByGenre = movieAPI.data.filter(item => item.genres.includes(sa))
+    // console.log(findAllMoviesByGenre) // TODO
+    return findAllMoviesByGenre;
 }
 
 exports.addMovie = async function(req) {

@@ -29,6 +29,16 @@
         "Musical-Dance",
         "Mystery"
       ]
+    },
+    {
+      "id": 253,
+      "name": "Some new cool movie",
+      "language": "English",
+      "genres": [
+        "Thriller",
+        "Comedy",
+        "Crime"
+      ]
     }
   ]
 }

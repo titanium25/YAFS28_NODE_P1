@@ -1,0 +1,45 @@
+{
+    box-sizing: border-box;
+}
+
+.row {
+    margin-left:-5px;
+    margin-right:-5px;
+}
+
+.column {
+    float: left;
+    width: 40%;
+    padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+td {
+    text-align: left;
+    padding: 16px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+th {
+    text-align: left;
+    padding: 16px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
