@@ -1,0 +1,41 @@
+
+
+<div class="row mt-5 justify-content-md-center">
+    <div class="card-body">
+        <h1 class="text-center mb-3">
+            Users Manage Console
+        </h1>
+        <% include ./partials/messages.ejs %>
+
+        <a href="/menu/manage/allUsers" class="btn btn-secondary mr-1 disabled">All Users</a>
+        <a href="/menu/manage/addUser" class="btn btn-secondary">Add User</a>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <% userList.forEach(function(user) { %>
+            <div class="col">
+                    <div class="card mt-2">
+                        <div class="card-body">
+                            <strong>Name:</strong> <%= user.name %> <br>
+                            <strong>Email:</strong> <%= user.email %><br>
+                            <strong>Created date:</strong> <%= user.date %><br>
+                            <strong>Role:</strong>
+                            <% if(user.isAdmin) { %>
+                                Admin
+                            <% } else { %>
+                                User
+                            <% } %>
+                            <br>
+                        </div>
+                        <div class="card-footer">
+                            <a href="/menu/manage/edit/<%= user._id %>" class="btn btn-info mr-1">Edit</a>
+                            <a href="/menu/manage/delete/<%= user._id %>" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+            </div>
+            <% }) %>
+        </div>
+
+        <a href="/menu" class="btn btn-secondary mt-2">Back to menu</a>
+    </div>
+</div>
+
