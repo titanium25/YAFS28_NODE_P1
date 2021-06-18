@@ -9,6 +9,7 @@ var flash = require('connect-flash');
 var session = require('express-session');
 var passport = require('passport')
 
+
 var loginController = require('./controllers/loginController');
 var movieController = require('./controllers/movieController');
 var userController = require('./controllers/userController');
@@ -19,22 +20,23 @@ var app = express();
 require('./config/passport')(passport);
 
 //DB config
-const db = require('./config/keys').MongoURI;
+const dbString = require('./config/keys').MongoURI;
+const dbOptions = {useNewUrlParser: true, useUnifiedTopology: true};
 
 //Connect to Mongo
-mongoose.connect(db ,{useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(dbString, dbOptions)
     .then(() => console.log('MongoDB Connected...'))
     .catch(err => console.log(err));
 
 // Bodyparser
 app.use(express.urlencoded({extended : false}))
 
+
 // Express Sessions
 app.use(session({
   secret: 'secret',
-  resave: true,
-  saveUninitialized: true,
-
+  resave: false, // was true
+  saveUninitialized: true
 }));
 
 // Passport middleware

@@ -5,6 +5,7 @@ const {ensureAuthenticated} = require('../config/auth');
 
 const movieBL = require('../model/moviesBL')
 
+// Menu page
 router.get('/', ensureAuthenticated, function(req, res, next) {
     res.render('menu', {
         name: req.user.name,

@@ -1,4 +1,6 @@
-const User = require('../model/User')
+const User = require('../model/User');
+const bcrypt = require('bcryptjs');
+
 
 exports.getAllUsers = function () {
     return new Promise((resolve, reject) => {
@@ -49,26 +51,33 @@ exports.updateUser = function (req) {
     }
 }
 
-
-//TODO: move logic from controller to BL
-exports.addUser = function (obj) {
+exports.addUser = function (req, res) {
+    const {name, email, password, isAdmin} = req.body
     return new Promise((resolve, reject) => {
-        let per = new User({
-            name: obj.name,
-            Age: obj.Age,
+        const newUser = new User({
+            name,
+            email,
+            password,
+            isAdmin
         });
 
-        per.save(function (err) {
-            if (err) {
-                reject(err);
-            } else {
-                resolve('Created')
-            }
-        })
-    });
+        // Hash Password
+        bcrypt.genSalt(10, (err, salt) =>
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        newUser.password = hash;
+                        newUser.save()
+                        resolve(console.log('New User Created'))
+                    }
+                }
+            ))
+    })
 }
 
-exports.deleteUser = function (id){
+
+exports.deleteUser = function (id) {
     return new Promise((resolve, reject) => {
         User.findByIdAndDelete(id, function (err, data) {
             if (err) {

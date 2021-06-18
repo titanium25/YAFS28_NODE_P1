@@ -1,16 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-const loginBL = require('../model/loginBL');
 const bcrypt = require('bcryptjs');
-// User model
 const User = require('../model/User');
-// Passport
-const passport = require('passport')
+const passport = require('passport');
 
 // Login page
 router.get('/', function (req, res, next) {
-
     res.render('login');
 });
 

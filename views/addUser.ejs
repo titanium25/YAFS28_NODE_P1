@@ -17,7 +17,6 @@
                                 name="name"
                                 class="form-control"
                                 placeholder="Enter Name"
-                                value="<%= typeof name != 'undefined' ? name : '' %>"
                         />
                     </div>
                     <div class="form-group">
@@ -28,7 +27,6 @@
                                 name="email"
                                 class="form-control"
                                 placeholder="Enter Email"
-                                value="<%= typeof email != 'undefined' ? email : '' %>"
                         />
                     </div>
                     <div class="form-group">
@@ -39,21 +37,8 @@
                                 name="password"
                                 class="form-control"
                                 placeholder="Create Password"
-                                value="<%= typeof password != 'undefined' ? password : '' %>"
                         />
                     </div>
-                    <div class="form-group">
-                        <label for="password2">Confirm Password</label>
-                        <input
-                                type="password"
-                                id="password2"
-                                name="password2"
-                                class="form-control"
-                                placeholder="Confirm Password"
-                                value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
-                        />
-                    </div>
-
                     <div class="form-group">
                         <input class="form-group-input" type="radio" name="isAdmin" id="role1" value="true" checked>
                         <label class="form-group-label mb-lg-2" for="role1">

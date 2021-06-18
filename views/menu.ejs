@@ -4,10 +4,12 @@
     <a href="/menu/logout" class="btn btn-secondary">Logout</a>
     <br>
     <br>
+    <% include ./partials/messages.ejs %>
+
     <div class="row">
       <div class="col-sm-3">
         <div class="card">
-          <img class="card-img-top p-3" src="/img/pngwing.com.png" alt="Card image cap">
+          <img class="card-img-top p-3" src="/img/find_icon.png" alt="Card image cap">
           <div class="card-body">
             <h4 class="card-title">Search for movie</h4>
             <p class="card-text">
@@ -20,7 +22,7 @@
       </div>
       <div class="col-sm-3">
         <div class="card">
-          <img class="card-img-top p-3" src="/img/1574017-removebg-preview.png" alt="Card image cap">
+          <img class="card-img-top p-3" src="/img/movie_icon.png" alt="Card image cap">
           <div class="card-body">
             <h4 class="card-title">Add a new movie</h4>
             <p class="card-text">
@@ -34,7 +36,7 @@
       <% if(isAdmin) { %>
       <div class="col-sm-3">
         <div class="card">
-          <img class="card-img-top p-3" src="/img/4812793-removebg-preview.png" alt="Card image cap">
+          <img class="card-img-top p-3" src="/img/users_console_icon.png" alt="Card image cap">
           <div class="card-body">
             <h4 class="card-title">User Management Console</h4>
             <p class="card-text">
