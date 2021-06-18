@@ -3,21 +3,61 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var session = require('express-session')
+var expressLayouts = require('express-ejs-layouts');
+var mongoose = require('mongoose');
+var flash = require('connect-flash');
+var session = require('express-session');
+var passport = require('passport')
 
 var loginController = require('./controllers/loginController');
 var movieController = require('./controllers/movieController');
+var userController = require('./controllers/userController');
 
 var app = express();
 
-// view engine setup
+// Passport config
+require('./config/passport')(passport);
+
+//DB config
+const db = require('./config/keys').MongoURI;
+
+//Connect to Mongo
+mongoose.connect(db ,{useNewUrlParser: true, useUnifiedTopology: true})
+    .then(() => console.log('MongoDB Connected...'))
+    .catch(err => console.log(err));
+
+// Bodyparser
+app.use(express.urlencoded({extended : false}))
+
+// Express Sessions
+app.use(session({
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: true,
+
+}));
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Connect flash
+app.use(flash());
+
+// Global variables
+app.use(function(req, res, next) {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  next();
+});
+
+// EJS view engine setup
+app.use(expressLayouts)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.set("layout extractScripts", true);
 
-//session's
-app.use(session({
-  secret: 'keyboard cat'
-}));
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -27,6 +67,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', loginController);
 app.use('/menu', movieController);
+app.use('/menu/manage', userController);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

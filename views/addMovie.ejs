@@ -1,56 +1,77 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Add a new movie</title>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript"
-            src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
-                removeItemButton: true,
-                maxItemCount: 3,
-                searchResultLimit: 32,
-                renderChoiceLimit: 32
-            });
-
-
+<script type="text/javascript">
+    $(document).ready(function () {
+        var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+            removeItemButton: true,
+            maxItemCount: 3,
+            searchResultLimit: 32,
+            renderChoiceLimit: 32
         });
-    </script>
-</head>
-<body>
+    });
+</script>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
 <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
 
-<h1>Add a new movie</h1>
-<div class="row d-flex justify-content-left mt-100">
-    <div class="col-md-4">
+
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+        <div class="card card-body">
+            <h1 class="text-center mb-3">
+                Add new movie
+            </h1>
+            <% include ./partials/messages.ejs %>
         <form action="/menu/addForm" method="post">
-            Title: <input type="text" name="title"> <br> <br>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input
+                        type="name"
+                        id="name"
+                        name="name"
+                        class="form-control"
+                        placeholder="Enter Name"
+                        value="<%= typeof name != 'undefined' ? name : '' %>"
+                />
+            </div>
+
+            <div class="form-group">
             <label for="language">Language:</label>
-            <select name="language" id="language">
+            <select
+                    name="language"
+                    id="language"
+                    class="form-control"
+                    placeholder="Enter Language"
+                    value="<%= typeof language != 'undefined' ? language : '' %>">
                 <option value=""></option>
                 <% languageList.forEach(function(item) { %>
                     <option value="<%= item %>"><%= item %></option>
                 <% }); %>
             </select>
-            <br> <br>
-            <label for="genres">Genres:</label>
-            <select name="genres" id="choices-multiple-remove-button" placeholder="Select upto 3 geners" multiple>
-                <option value=""></option>
-                <% genreList.forEach(function(item) { %>
-                    <option value="<%= item %>"><%= item %></option>
-                <% }); %>
-            </select>
-            <input type="submit" value="Add"> <br> <br>
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="genres">Genres:</label>
+                <select name="genres"
+                        id="choices-multiple-remove-button"
+                        placeholder="Select upto 3 geners"
+                        multiple>
+                    <option value=""></option>
+                    <% genreList.forEach(function(item) { %>
+                        <option value="<%= item %>"><%= item %></option>
+                    <% }); %>
+                </select>
+            </div>
+
+
+
+
+            <button type="submit" class="btn btn-primary btn-block">
+                Submit
+            </button>
+
         </form>
+        </div>
     </div>
 </div>
-<%= message %>
-<br> <br>
-<a href="/menu">Back to menu</a>
-</body>
-</html>
+<a href="/menu" class="btn btn-secondary mt-3">Back to menu</a>

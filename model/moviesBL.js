@@ -1,11 +1,6 @@
 const restDAL = require('../DAL/restDAL')
 const jsonDAL = require('../DAL/jsonDAL')
 
-
-// globalConstants = async (req) => {
-//
-// }
-
 exports.findMovie = async function(req) {
     const moviesAPI = await restDAL.getAllMovies()
     const moviesJSON = await jsonDAL.getMovies()
@@ -51,26 +46,25 @@ exports.findMovieByGenre = async function(req) {
 }
 
 exports.addMovie = async function(req) {
-    const name = req.body.title;
-    const genres = req.body.genres;
-    const language = req.body.language;
 
-    if(name.length == 0 ) {
-        return "Please type movie title"
-    }
-    if (language.length == 0) {
-        return "Please choose movie language"
-    }
-    if(genres == undefined){
-        return "Please choose movie genre"
-    } else {
+    const {name, language, genres} = req.body
+    let errors = [];
+
+    // Check required fields
+    if (!name) errors.push({msg: 'Please type movie title'});
+    if (!language) errors.push({msg: 'Please choose movie language'});
+    if (!genres) errors.push({msg: 'Please choose movie genre'});
+
+    // Validation passed
+    let success_msg;
+    if (errors.length == 0) {
         const moviesJSON = await jsonDAL.getMovies();
         const moviesAPI = await restDAL.getAllMovies()
         const lastMovieAPI = moviesAPI.data
 
         let moviesArrJSON = moviesJSON.movies
         let lastMovie = moviesArrJSON[moviesArrJSON.length - 1]
-        if(lastMovie === undefined)
+        if (lastMovie === undefined)
             lastMovie = lastMovieAPI[lastMovieAPI.length - 1]
         let id = lastMovie.id + 1
 
@@ -80,10 +74,10 @@ exports.addMovie = async function(req) {
             language,
             genres
         })
-        let response = await jsonDAL.saveMovie(moviesJSON)
-        return response;
+        await jsonDAL.saveMovie(moviesJSON);
+        return success_msg = 'Created!';
     }
-
+    return errors;
 }
 
 exports.findMovieById = async function (id) {

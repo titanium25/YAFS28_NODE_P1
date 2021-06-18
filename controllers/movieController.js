@@ -1,33 +1,40 @@
 var express = require('express');
 var router = express.Router();
+const {ensureAuthenticated} = require('../config/auth');
+
 
 const movieBL = require('../model/moviesBL')
 
-router.get('/', function(req, res, next) {
-    res.render('menu', {});
+router.get('/', ensureAuthenticated, function(req, res, next) {
+    res.render('menu', {
+        name: req.user.name,
+        isAdmin: req.user.isAdmin,
+    });
 });
 
-router.get('/add', async function(req, res, next) {
+router.get('/add', ensureAuthenticated, async function(req, res, next) {
     let genreList = await movieBL.getGenres();
     let languageList = await movieBL.getLanguage()
-    res.render('addMovie', {message : '', genreList, languageList});
+    res.render('addMovie', {genreList, languageList});
 });
 
-router.post('/addForm', async function(req, res, next) {
+// Add New Movie Handler
+router.post('/addForm', ensureAuthenticated, async function(req, res, next) {
     let saveMovie = await movieBL.addMovie(req)
     let genreList = await movieBL.getGenres();
     let languageList = await movieBL.getLanguage()
-    res.render('addMovie', {message : saveMovie, genreList, languageList});
+
+    res.render('addMovie', {errors : saveMovie, genreList, languageList});
 });
 
-router.get('/search', async function(req, res, next) {
+router.get('/search', ensureAuthenticated, async function(req, res, next) {
     let genreList = await movieBL.getGenres();
     let languageList = await movieBL.getLanguage()
     let passedVariable = req.query.valid;
     res.render('search', {message : passedVariable, genreList, languageList});
 });
 
-router.post('/search', async function(req, res, next) {
+router.post('/search', ensureAuthenticated, async function(req, res, next) {
     let searchResults = await movieBL.findMovie(req)
     let params = [req.body.title, req.body.language, req.body.genres]
     console.log(params)
@@ -48,12 +55,18 @@ router.post('/search', async function(req, res, next) {
 
 });
 
-router.get('/search/:id', async function(req, res, next) {
+router.get('/search/:id', ensureAuthenticated, async function(req, res, next) {
     let movieId = req.params.id;
     let movie = await movieBL.findMovieById(movieId);
     res.render('movie', {movie, lastId : 250});
 });
 
 
+// Logout Handle
+router.get('/logout', function(req, res, next) {
+    req.logout();
+    req.flash('success_msg', 'You are logged out');
+    res.redirect('/');
+});
 
 module.exports = router;
