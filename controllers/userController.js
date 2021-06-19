@@ -22,11 +22,10 @@ router.get('/edit/:id', ensureAuthenticated, ensureIsAdmin, async function(req, 
 router.post('/editUserForm', ensureAuthenticated, ensureIsAdmin, async function(req, res, next) {
     let errors = await usersBL.updateUser(req);
     let user = await usersBL.getUser(req.body.id);
-    console.log(errors)
     if(typeof errors != 'undefined'){
         res.render('editUser', {user, errors});
     } else {
-        req.flash('success_msg', 'User Edited Successfully');
+        req.flash('success_msg', `User ${user.name} Edited Successfully`);
         res.redirect('/menu/manage');
     }
 });
@@ -34,8 +33,9 @@ router.post('/editUserForm', ensureAuthenticated, ensureIsAdmin, async function(
 // Delete User
 router.get('/delete/:id', ensureAuthenticated, ensureIsAdmin, async function(req, res, next) {
     let id = req.params.id;
-    await usersBL.deleteUser(id)
-    req.flash('success_msg', 'User Deleted');
+    let user = await usersBL.getUser(id)
+    await usersBL.deleteUser(id);
+    req.flash('success_msg', `User ${user.name} Deleted`);
     res.redirect('/menu/manage');
 });
 
@@ -46,8 +46,8 @@ router.get('/addUser', ensureAuthenticated, ensureIsAdmin, function(req, res, ne
 
 // Add User Handler
 router.post('/addUserForm', ensureAuthenticated, ensureIsAdmin, async function(req, res, next) {
-    await usersBL.addUser(req)
-    req.flash('success_msg', 'User Added!');
+    await usersBL.addUser(req);
+    req.flash('success_msg', `User ${req.body.name} Added Successfully`);
     res.redirect('/menu/manage');
 });
 

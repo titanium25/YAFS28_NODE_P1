@@ -1,27 +1,23 @@
 const restDAL = require('../DAL/restDAL')
 const jsonDAL = require('../DAL/jsonDAL')
 
-exports.findMovie = async function(req) {
-    const moviesAPI = await restDAL.getAllMovies()
-    const moviesJSON = await jsonDAL.getMovies()
-    const name = req.body.title.toLowerCase();
-    const genres = req.body.genres;
-    const language = req.body.language;
 
-    let movieREST = moviesAPI.data.filter(item =>
-        (item.name.toLowerCase().includes(name) || name == '') &&
+exports.findMovie = async function (req) {
+    const {name, language, genres} = req.body
+    const allMoviesAPI = await restDAL.getAllMovies()
+    const allMoviesJSON = await jsonDAL.getMovies()
+
+    let movieREST = allMoviesAPI.data.filter(item =>
+        (item.name.toLowerCase().includes(name.toLowerCase()) || name.toLowerCase() == '') &&
         (item.language == language || language == '') &&
         (item.genres.includes(genres) || genres == '')
     )
-    let movieJSON = moviesJSON.movies.filter(item =>
-        (item.name.toLowerCase().includes(name) || name == '') &&
+    let movieJSON = allMoviesJSON.movies.filter(item =>
+        (item.name.toLowerCase().includes(name.toLowerCase()) || name.toLowerCase() == '') &&
         (item.language == language || language == '') &&
         (item.genres.includes(genres) || genres == '')
     )
-
-
-        return movieREST.concat(movieJSON)
-
+    return movieREST.concat(movieJSON)
 }
 
 // TODO
@@ -29,55 +25,51 @@ exports.findMovie = async function(req) {
 //
 
 // Search for
-exports.findMovieByGenre = async function(req) {
-    // const moviesJSON = await jsonDAL.getMovies();
-    const movieAPI = await restDAL.getAllMovies()
-    // let moviesArrJSON = moviesJSON.movies;
-    const name = req.body.title.toLowerCase();
-
-    let fa = movieAPI.data.filter(item => item.name.toLowerCase().includes(name))
-    console.log(fa)
-
-    let sa = fa[0].genres[0]
-    console.log(sa)
-    let findAllMoviesByGenre = movieAPI.data.filter(item => item.genres.includes(sa))
-    // console.log(findAllMoviesByGenre) // TODO
+exports.findMovieByGenre = async function (req) {
+    const allMoviesJSON = await jsonDAL.getMovies();
+    const allMoviesAPI = await restDAL.getAllMovies()
+    const name = req.body.name.toLowerCase();
+    let findInAPI = allMoviesAPI.data.filter(item => item.name.toLowerCase().includes(name))
+    let findInJSON = allMoviesJSON.movies.filter(item => item.name.toLowerCase().includes(name))
+    let concat = findInAPI.concat(findInJSON)
+    let sameGenresFound1 = concat[0].genres[0]
+    let sameGenresFound2 = concat[0].genres[1]
+    let sameGenresFound3 = concat[0].genres[2]
+    let findAllMoviesByGenre = allMoviesAPI.data.filter(item => item.genres.includes(sameGenresFound1 && sameGenresFound2 && sameGenresFound3))
     return findAllMoviesByGenre;
 }
 
-exports.addMovie = async function(req) {
-
+exports.addMovie = async function (req) {
     const {name, language, genres} = req.body
     let errors = [];
 
     // Check required fields
-    if (!name) errors.push({msg: 'Please type movie title'});
-    if (!language) errors.push({msg: 'Please choose movie language'});
-    if (!genres) errors.push({msg: 'Please choose movie genre'});
+    if (!name || !language || !genres) {
+        if (!name) errors.push({msg: 'Please type movie title'});
+        if (!language) errors.push({msg: 'Please choose movie language'});
+        if (!genres) errors.push({msg: 'Please choose movie genre'});
+        return errors
+    } else {
+        // Validation passed
+        const allMoviesJSON = await jsonDAL.getMovies();
+        const allMoviesAPI = await restDAL.getAllMovies();
+        const allMoviesJSONData = allMoviesJSON.movies;
+        const allMoviesAPIData = allMoviesAPI.data;
 
-    // Validation passed
-    let success_msg;
-    if (errors.length == 0) {
-        const moviesJSON = await jsonDAL.getMovies();
-        const moviesAPI = await restDAL.getAllMovies()
-        const lastMovieAPI = moviesAPI.data
-
-        let moviesArrJSON = moviesJSON.movies
-        let lastMovie = moviesArrJSON[moviesArrJSON.length - 1]
+        // Search for last ID
+        let lastMovie = allMoviesJSONData[allMoviesJSONData.length - 1]
         if (lastMovie === undefined)
-            lastMovie = lastMovieAPI[lastMovieAPI.length - 1]
+            lastMovie = allMoviesAPIData[allMoviesAPIData.length - 1]
         let id = lastMovie.id + 1
 
-        moviesArrJSON.push({
+        allMoviesJSONData.push({
             id,
             name,
             language,
             genres
         })
-        await jsonDAL.saveMovie(moviesJSON);
-        return success_msg = 'Created!';
+        await jsonDAL.saveMovie(allMoviesJSON);
     }
-    return errors;
 }
 
 exports.findMovieById = async function (id) {

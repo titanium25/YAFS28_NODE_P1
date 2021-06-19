@@ -35,8 +35,9 @@ app.use(express.urlencoded({extended : false}))
 // Express Sessions
 app.use(session({
   secret: 'secret',
-  resave: false, // was true
-  saveUninitialized: true
+  resave: true, // was true
+  saveUninitialized: true,
+  cookie: { maxAge: 60000 }
 }));
 
 // Passport middleware

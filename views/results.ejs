@@ -1,62 +1,71 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Search Result Page</title>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <link rel='stylesheet' href='/stylesheets/table2.css'/>
-</head>
 <script>
     function goBack() {
         window.history.back();
     }
 </script>
-<body>
-<h1>Result Page</h1>
-<h2>Search parameters </h2>
-<% if (params[0]) { %>
-    <h3>Title: <%= params[0] %></h3>
-<% } %>
-<% if (params[1]) { %>
-    <h3>Language: <%= params[1] %></h3>
-<% } %>
-<% if (params[2]) { %>
-    <h3>Genre: <%= params[2] %></h3>
-<% } %>
 
-<button onclick="goBack()">Go Back</button>
-<br> <br>
+<div class="row mt-5 justify-content-md-center">
+    <div class="card-body">
 
-<div class="row">
-    <div class="column">
-        <table border="1" style="float: left">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Meets the search requirements</th>
-            </tr>
-            <% let count = 0; movie.forEach(function(m) { %>
-                <tr>
-                    <th scope="row"><%= count + 1 %></th>
-                    <td><a href="/menu/search/<%= m.id %>"><%= m.name %></a></td>
-                </tr>
-                <% count++ %>
-            <% }) %>
-        </table>
-    </div>
-    <div class="column">
-        <table border="1" style="float: left">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Same Genre - <%= movie[0].genres %></th>
-            </tr>
-            <% let countGenre = 0; genres.forEach(function(m) { %>
-                <tr>
-                    <th scope="row"><%= countGenre + 1 %></th>
-                    <td><a href="/menu/search/<%= m.id %>"><%= m.name %></a></td>
-                </tr>
-                <% countGenre++ %>
-            <% }) %>
-        </table>
+        <h1 class="text-center mb-3">
+            <i class="fas fa-search"></i> Search Results
+        </h1>
+
+        <h2 class="text mb-2">
+            <i class="fas fa-keyboard"></i> Inputs: &nbsp;
+
+        <% if (params[0]) { %>
+                <i class="fas fa-film"></i> Title: <em><%= params[0] %></em> &nbsp;
+        <% } %>
+        <% if (params[1]) { %>
+                <i class="fas fa-language"></i> Language: <em><%= params[1] %></em> &nbsp;
+        <% } %>
+        <% if (params[2]) { %>
+                <i class="fas fa-theater-masks"></i> Genre: <em><%= params[2] %> </em> &nbsp;
+        <% } %>
+        </h2>
+
+        <button onclick="goBack()" class="btn btn-secondary my-2"><i class="fas fa-undo-alt"></i> Go Back</button>
+
+        <div class="row">
+            <div class="column">
+                <table class="table table-striped" style="float: left">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Meets the search requirements</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% let count = 0; searchResults.forEach(function(m) { %>
+                        <tr>
+                            <th scope="row"><%= count + 1 %></th>
+                            <td><a href="/menu/search/<%= m.id %>"><%= m.name %></a></td>
+                        </tr>
+                        <% count++ %>
+                    <% }) %>
+                    <tbody>
+                </table>
+            </div>
+            <div class="column">
+                <table class="table table-striped" style="float: left">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Same Genre - <%= searchResults[0].genres %></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% let countGenre = 0; searchGeneres.forEach(function(m) { %>
+                        <tr>
+                            <th scope="row"><%= countGenre + 1 %></th>
+                            <td><a href="/menu/search/<%= m.id %>"><%= m.name %></a></td>
+                        </tr>
+                        <% countGenre++ %>
+                    <% }) %>
+                    <tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
-</body>
-</html>

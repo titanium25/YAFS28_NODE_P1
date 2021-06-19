@@ -62,36 +62,37 @@ router.post('/registerForm', function (req, res, next) {
                         name,
                         email,
                         password,
-                        isAdmin : false
+                        isAdmin: false
                     });
 
                     // Hash Password
                     bcrypt.genSalt(10, (err, salt) =>
                         bcrypt.hash(newUser.password, salt, (err, hash) => {
-                            if (err) throw err;
-                            // Set Password to Hashed
-                            newUser.password = hash;
-                            // Save User
-                            newUser.save()
-                                .then(user => {
-                                    req.flash('success_msg', 'You are now registered and can log in')
-                                    res.redirect('/');
-                                })
-                                .catch(err => console.log(err))
-                        }
-                    ))
+                                if (err) throw err;
+                                // Set Password to Hashed
+                                newUser.password = hash;
+                                // Save User
+                                newUser.save()
+                                    .then(user => {
+                                        req.flash('success_msg', 'You are now registered and can log in')
+                                        res.redirect('/');
+                                    })
+                                    .catch(err => console.log(err))
+                            }
+                        ))
                 }
             })
     }
-
 });
 
-// Login handle
+// Login handler
 router.post('/signIn', async function (req, res, next) {
+
     passport.authenticate('local', {
-        successRedirect : '/menu',
+        successRedirect: '/menu',
         failureRedirect: '/',
-        failureFlash: true
+        failureFlash: true,
+        credits : req.session.credits = 5
     })(req, res, next)
 });
 

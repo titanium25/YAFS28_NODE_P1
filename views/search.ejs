@@ -1,24 +1,55 @@
+<div class="row mt-5 justify-content-md-center">
+    <div class="card-body">
+        <h1 class="text-center mb-3">
+            <i class="fas fa-search"></i> Search For Movie
+        </h1>
+        <div class="card mt-2" style="width: 20rem;">
+            <div class="card-body">
+                <% include ./partials/messages.ejs %>
 
-    <h1>Search for movie</h1>
-    <form action="/menu/search" method="post">
-      Title: <input type="text" name="title"> <br> <br>
-      <label for="language">Language:</label>
-      <select name="language" id="language">
-        <option value=""></option>
-      <% languageList.forEach(function(item) { %>
-          <option value="<%= item %>"><%= item %></option>
-        <% }); %>
-      </select>
-      <br> <br>
-      <label for="genres">Genres:</label>
-      <select name="genres" id="genres">
-        <option value=""></option>
-      <% genreList.forEach(function(item) { %>
-          <option value="<%= item %>"><%= item %></option>
-        <% }); %>
-      </select>
-      <input type="submit" value="Search"> <br> <br>
-    </form>
-    <%= message %>
-    <br> <br>
-    <a href="/menu">Back to menu</a>
+                <form action="/menu/search" method="post">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input
+                                type="name"
+                                id="name"
+                                name="name"
+                                class="form-control"
+                                placeholder="Enter Name"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="language">Language:</label>
+                        <select
+                                name="language"
+                                id="language"
+                                class="form-control"
+                                placeholder="Enter Language">
+                            <option value=""></option>
+                            <% languageList.forEach(function(item) { %>
+                                <option value="<%= item %>"><%= item %></option>
+                            <% }); %>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="genres">Genre:</label>
+                        <select
+                                name="genres"
+                                id="genres"
+                                class="form-control"
+                                placeholder="Enter genre">
+                            <option value=""></option>
+                            <% genreList.forEach(function(item) { %>
+                                <option value="<%= item %>"><%= item %></option>
+                            <% }); %>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        Search
+                    </button>
+                </form>
+            </div>
+        </div>
+        <a href="/menu" class="btn btn-secondary mt-2"><i class="fas fa-undo-alt"></i> Back to menu</a>
+    </div>
+</div>

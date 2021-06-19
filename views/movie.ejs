@@ -1,31 +1,43 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Movie Page</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <script>
+<script>
     function goBack() {
-      window.history.back();
+        window.history.back();
     }
-  </script>
-  <body>
-    <h1>Movie Page</h1>
+</script>
 
-    Title: <%= movie.name %> <br>
-    Language : <%= movie.language %> <br>
-    Genres : <%= movie.genres %> <br>
-
-    <% if(movie.id < lastId){ %>
-      Rating: <%= movie.rating.average %> <br>
-      Premiered : <%= movie.premiered %> <br>
-      Official Site : <a href="<%= movie.officialSite %>" target="_blank"><%= movie.officialSite %></a> <br>
-    <br>
-      <a href=<%= movie.image.original %> target="_blank"><img src=<%= movie.image.medium %>></a>
-    <br>
-      <%- movie.summary %>
-    <% } %>
-    <br>
-    <button onclick="goBack()">Go Back</button>
-  </body>
-</html>
+<div class="row mt-5 justify-content-md-center">
+    <div class="card-body">
+        <h1 class="text-center mb-3">
+            <i class="fas fa-film"></i> Movie Page
+        </h1>
+        <div class="card mb-3" style="max-width: 700px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <% if(movie.id < lastId){ %>
+                        <a href=<%= movie.image.original %> target="_blank"><img src=<%= movie.image.medium %>></a>
+                    <% } else { %>
+                            <img src="/img/no-image.png">
+                    <% } %>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= movie.name %>
+                        </h5>
+                        <p class="card-text">
+                            Language : <%= movie.language %> <br>
+                            Genres : <%= movie.genres %> <br>
+                        <% if(movie.id < lastId){ %>
+                            Rating: <%= movie.rating.average %> <br>
+                            Premiered : <%= movie.premiered %> <br>
+                            Official Site : <a href="<%= movie.officialSite %>"
+                                               target="_blank"><%= movie.officialSite %></a>
+                            <%- movie.summary %>
+                            <% } %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button onclick="goBack()" class="btn btn-secondary my-2"><i class="fas fa-undo-alt"></i> Go Back</button>
+    </div>
+</div>
